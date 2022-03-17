@@ -3,6 +3,7 @@ package com.sswon314.Dwith.webTest;
 import com.sswon314.Dwith.serviceTest.PostsService;
 import com.sswon314.Dwith.webTest.dto.PostsResponseDto;
 import com.sswon314.Dwith.webTest.dto.PostsSaveRequestDto;
+import com.sswon314.Dwith.webTest.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,14 @@ public class PostsApiController {
 
     private final PostsService postsService;
 
-    @PutMapping("/api/v1/posts")
+    @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(requestDto);
+    }
+
+    @PutMapping("/api/v1/posts/{id}")
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+        return postsService.update(id, requestDto);
     }
 
     @GetMapping("/api/v1/posts/{id}")
